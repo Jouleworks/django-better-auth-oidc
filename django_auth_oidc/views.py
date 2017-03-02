@@ -7,31 +7,31 @@ from django.utils.http import is_safe_url
 from . import oidc
 
 def login(request):
-    return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
+	return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
 
-    return redirect(oidc.server.authorize(
-        redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
-        state = return_path,
-    ))
+	return redirect(oidc.server.authorize(
+		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
+		state = return_path,
+	))
 
 def callback(request):
-    return_path = request.GET.get("state")
+	return_path = request.GET.get("state")
 
-    res = oidc.server.request_token(
-        redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
-        code = request.GET["code"],
-    )
+	res = oidc.server.request_token(
+		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
+		code = request.GET["code"],
+	)
 
-    User = auth.get_user_model()
-    user, created = User.objects.get_or_create(username=res.id["sub"])
-    auth.login(request, user)
+	User = auth.get_user_model()
+	user, created = User.objects.get_or_create(username=res.id["sub"])
+	auth.login(request, user)
 
-    url_is_safe = is_safe_url(
-        url = return_path,
-        host = request.get_host(),
-        #allowed_hosts = set(request.get_host()),
-        #require_https = request.is_secure(),
-    )
-    if not url_is_safe:
-        return redirect(resolve_url(settings.LOGIN_REDIRECT_URL))
-    return redirect(return_path)
+	url_is_safe = is_safe_url(
+		url = return_path,
+		host = request.get_host(),
+		#allowed_hosts = set(request.get_host()),
+		#require_https = request.is_secure(),
+	)
+	if not url_is_safe:
+		return redirect(resolve_url(settings.LOGIN_REDIRECT_URL))
+	return redirect(return_path)
