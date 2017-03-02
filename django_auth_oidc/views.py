@@ -4,12 +4,12 @@ from django.shortcuts import redirect, resolve_url
 from django.urls import reverse
 from django.utils.http import is_safe_url
 
-from . import oidc
+from . import auth as _auth
 
 def login(request):
 	return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
 
-	return redirect(oidc.server.authorize(
+	return redirect(_auth.server.authorize(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
 		state = return_path,
 	))
@@ -17,7 +17,7 @@ def login(request):
 def callback(request):
 	return_path = request.GET.get("state")
 
-	res = oidc.server.request_token(
+	res = _auth.server.request_token(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
 		code = request.GET["code"],
 	)

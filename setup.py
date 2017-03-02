@@ -16,7 +16,7 @@ setup(
 	keywords = "django,auth,oauth,openid,oidc,social,ldap",
 	license = "LGPLv2+",
 
-    install_requires = ["django>=1.10.0", "python-jose"],
+    install_requires = ["django>=1.10.0", "openid_connect"],
 
 	packages = ["django_auth_oidc"],
 	package_data = {"": ["LICENSE"]},
