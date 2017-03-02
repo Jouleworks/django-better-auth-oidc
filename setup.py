@@ -7,29 +7,28 @@ with open('README.rst') as f:
 
 setup(
 	name = "django-auth-oidc",
-	version = "0.1.0",
+	version = "0.2.0",
 	description = "OpenID Connect authentication support for Django",
 	long_description = readme,
-	author = "Linus Lewandowski",
-	author_email = "linus@lew21.net",
-	url = "https://github.com/LEW21/django-auth-oidc",
-	keywords = "django,auth,oauth,openid,oidc,social,ldap",
+	author = "Aiakos Contributors",
+	author_email = "aiakos@aiakosauth.com",
+	url = "https://gitlab.com/aiakos/django-auth-oidc",
+	keywords = "django auth oauth openid oidc social ldap",
 
-    install_requires = ["django>=1.10.0", "openid_connect"],
+	install_requires = ["django>=1.10.0", "openid_connect"],
 
 	packages = ["django_auth_oidc"],
-	package_data = {"": ["LICENSE"]},
-	package_dir = {"django_auth_oidc": "django_auth_oidc"},
 	zip_safe = True,
 
 	license = "MIT",
 	classifiers = [
 		'Development Status :: 4 - Beta',
 		'Intended Audience :: System Administrators',
-		'Natural Language :: English',
 		'License :: OSI Approved :: MIT License',
 		'License :: OSI Approved :: BSD License',
 		'Programming Language :: Python',
+		'Programming Language :: Python :: 2',
+		'Programming Language :: Python :: 2.7',
 		'Programming Language :: Python :: 3',
 		'Programming Language :: Python :: 3.5',
 		'Programming Language :: Python :: 3.6',
