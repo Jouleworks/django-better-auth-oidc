@@ -14,7 +14,6 @@ setup(
 	author_email = "linus@lew21.net",
 	url = "https://github.com/LEW21/django-auth-oidc",
 	keywords = "django,auth,oauth,openid,oidc,social,ldap",
-	license = "LGPLv2+",
 
     install_requires = ["django>=1.10.0", "openid_connect"],
 
@@ -22,11 +21,14 @@ setup(
 	package_data = {"": ["LICENSE"]},
 	package_dir = {"django_auth_oidc": "django_auth_oidc"},
 	zip_safe = True,
+
+	license = "MIT",
 	classifiers = [
 		'Development Status :: 4 - Beta',
 		'Intended Audience :: System Administrators',
 		'Natural Language :: English',
-		'License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)',
+		'License :: OSI Approved :: MIT License',
+		'License :: OSI Approved :: BSD License',
 		'Programming Language :: Python',
 		'Programming Language :: Python :: 3',
 		'Programming Language :: Python :: 3.5',
