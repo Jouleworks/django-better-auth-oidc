@@ -12,6 +12,7 @@ def login(request):
 	return redirect(_auth.server.authorize(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
 		state = return_path,
+		scope = getattr(settings, 'AUTH_SCOPE', ('openid', ))
 	))
 
 def callback(request):
@@ -25,6 +26,7 @@ def callback(request):
 	User = auth.get_user_model()
 	user, created = User.objects.get_or_create(username=res.id["sub"])
 	auth.login(request, user)
+	request.session['user_profile'] = res.id
 
 	url_is_safe = is_safe_url(
 		url = return_path,
