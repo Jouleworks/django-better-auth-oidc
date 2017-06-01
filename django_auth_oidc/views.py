@@ -29,7 +29,7 @@ def login(request):
 	return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
 
 	return redirect(_auth.server.authorize(
-		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
+		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:login-done")),
 		state = return_path,
 		scope = AUTH_SCOPE,
 	))
@@ -39,7 +39,7 @@ def callback(request):
 	return_path = request.GET.get("state")
 
 	res = _auth.server.request_token(
-		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
+		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:login-done")),
 		code = request.GET["code"],
 	)
 

@@ -48,7 +48,7 @@ urls.py
 .. code:: python
 
 	urlpatterns += [
-		url(r'^accounts/login/', include('django_auth_oidc.urls')),
+		url(r'^auth/', include('django_auth_oidc.urls')),
 	]
 
 Configuration
@@ -57,7 +57,7 @@ Configuration
 Authorization Server
 ~~~~~~~~~~~~~~~~~~~~
 
-App's redirect URI: http(s)://app-domain/accounts/login/callback
+App's redirect URI: http(s)://app-domain/auth/done
 App's post-logout redirect URI: http(s)://app-domain/*LOGOUT_REDIRECT_URL* (or / if not set)
 
 Authorization Server details
