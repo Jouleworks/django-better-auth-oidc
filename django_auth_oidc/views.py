@@ -1,3 +1,5 @@
+from importlib import import_module
+
 from django.conf import settings
 from django.contrib import auth
 from django.shortcuts import redirect, resolve_url
@@ -24,6 +26,23 @@ try:
 except AttributeError:
 	AUTH_SCOPE = ('openid',)
 
+try:
+	GET_USER_FUNCTION = settings.AUTH_GET_USER_FUNCTION
+except AttributeError:
+	GET_USER_FUNCTION = 'django_auth_oidc:default_get_user'
+
+
+def _import_object(path, def_name):
+	try:
+		mod, cls = path.split(':', 1)
+	except ValueError:
+		mod = path
+		cls = def_name
+
+	return getattr(import_module(mod), cls)
+
+get_user = _import_object(GET_USER_FUNCTION, 'get_user')
+
 
 def login(request):
 	return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
@@ -43,8 +62,7 @@ def callback(request):
 		code = request.GET["code"],
 	)
 
-	User = auth.get_user_model()
-	user, created = User.objects.get_or_create(username=res.id["sub"])
+	user = get_user(res.id)
 	auth.login(request, user)
 	request.session['openid_token'] = res.id_token
 	request.session['openid'] = res.id
