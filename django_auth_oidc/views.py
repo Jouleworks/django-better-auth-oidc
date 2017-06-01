@@ -9,14 +9,26 @@ from django.utils.http import is_safe_url
 
 from . import auth as _auth
 
+try:
+	LOGIN_REDIRECT_URL = settings.LOGIN_REDIRECT_URL
+except AttributeError:
+	LOGIN_REDIRECT_URL = '/'
+
+try:
+	AUTH_SCOPE = settings.AUTH_SCOPE
+except AttributeError:
+	AUTH_SCOPE = ('openid',)
+
+
 def login(request):
 	return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
 
 	return redirect(_auth.server.authorize(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:callback")),
 		state = return_path,
-		scope = getattr(settings, 'AUTH_SCOPE', ('openid', ))
+		scope = AUTH_SCOPE,
 	))
+
 
 def callback(request):
 	return_path = request.GET.get("state")
@@ -38,5 +50,5 @@ def callback(request):
 		#require_https = request.is_secure(),
 	)
 	if not url_is_safe:
-		return redirect(resolve_url(settings.LOGIN_REDIRECT_URL))
+		return redirect(resolve_url(LOGIN_REDIRECT_URL))
 	return redirect(return_path)
