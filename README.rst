@@ -14,8 +14,8 @@ What is OpenID Connect?
 
 It's a OAuth2-based standard for authentication in applications.
 
-It can be used for social logins (but django-extauth_ is much better
-for this case), and for setting up Single Sign-On into multiple services
+It can be used for social logins (but we recommend Aiakos_ if you need
+more than one), and for setting up Single Sign-On into multiple services
 hosted by the same company. In the last case, it somewhat supersedes LDAP,
 as with OIDC people are entering their credentials only into the views
 served by the Authentication Server, and not into all the company's
@@ -85,4 +85,4 @@ Behavior
 * AUTH_GET_USER_FUNCTION (default: 'django_auth_oidc:get_user_by_username') - name of a function that takes the user info dict, and returns an user object representing that user
 
 .. _openid-connect: https://gitlab.com/aiakos/python-openid-connect
-.. _django-extauth: https://github.com/aiakos/django-extauth
+.. _Aiakos: https://gitlab.com/aiakos/aiakos
