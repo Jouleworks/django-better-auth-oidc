@@ -15,7 +15,7 @@ setup(
 	url = "https://gitlab.com/aiakos/django-auth-oidc",
 	keywords = "django auth oauth openid oidc social ldap",
 
-	install_requires = ["django>=1.10.0", "openid_connect"],
+	install_requires = ['django>=1.8.0', 'openid_connect'],
 
 	packages = ["django_auth_oidc"],
 	zip_safe = True,
@@ -23,6 +23,11 @@ setup(
 	license = "MIT",
 	classifiers = [
 		'Development Status :: 4 - Beta',
+		'Framework :: Django',
+		'Framework :: Django :: 1.8',
+		'Framework :: Django :: 1.9',
+		'Framework :: Django :: 1.10',
+		'Framework :: Django :: 1.11',
 		'Intended Audience :: System Administrators',
 		'License :: OSI Approved :: MIT License',
 		'License :: OSI Approved :: BSD License',

@@ -25,7 +25,7 @@ Requirements
 ------------
 
 - Python 2.7 / 3.5+
-- Django 1.10+
+- Django 1.8+
 - openid-connect_
 
 Installation

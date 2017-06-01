@@ -1,7 +1,10 @@
 from django.conf import settings
 from django.contrib import auth
 from django.shortcuts import redirect, resolve_url
-from django.urls import reverse
+try:
+	from django.urls import reverse
+except ImportError:
+	from django.core.urlresolvers import reverse # deprecated since Django 1.10
 from django.utils.http import is_safe_url
 
 from . import auth as _auth
