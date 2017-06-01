@@ -5,4 +5,5 @@ app_name = 'django_auth_oidc'
 urlpatterns = [
 	url(r'^$', views.login, name='login'),
 	url(r'^callback/$', views.callback, name='callback'),
+	url(r'^logout/$', views.logout, name='logout'),
 ]

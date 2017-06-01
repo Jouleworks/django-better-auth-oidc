@@ -58,6 +58,7 @@ Authorization Server
 ~~~~~~~~~~~~~~~~~~~~
 
 App's redirect URI: http(s)://app-domain/accounts/login/callback
+App's post-logout redirect URI: http(s)://app-domain/*LOGOUT_REDIRECT_URL* (or / if not set)
 
 Authorization Server details
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
