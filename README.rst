@@ -59,8 +59,8 @@ Authorization Server
 
 App's redirect URI: http(s)://app-domain/accounts/login/callback
 
-Your application
-~~~~~~~~~~~~~~~~
+Authorization Server details
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You may specify following settings in the Django settings file:
 
@@ -76,6 +76,11 @@ Or, alternatively, you may set the AUTH_URL environment variable:
 	AUTH_URL=(protocol+)http(s)://client_id:client_secret@server/
 
 (Note: ":", "@", "/" and "%" inside client_id and client_secret must be urlquoted.)
+
+Behavior
+~~~~~~~~
+
+* AUTH_SCOPE (default: ['openid']) - list of scopes to request from the auth server
 
 .. _openid-connect: https://gitlab.com/aiakos/python-openid-connect
 .. _django-extauth: https://github.com/aiakos/django-extauth
