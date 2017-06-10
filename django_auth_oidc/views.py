@@ -29,7 +29,7 @@ except AttributeError:
 try:
 	GET_USER_FUNCTION = settings.AUTH_GET_USER_FUNCTION
 except AttributeError:
-	GET_USER_FUNCTION = 'django_auth_oidc:default_get_user'
+	GET_USER_FUNCTION = 'django_auth_oidc:get_user_by_username'
 
 
 def _import_object(path, def_name):
