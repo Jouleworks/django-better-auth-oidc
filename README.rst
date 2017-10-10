@@ -82,7 +82,7 @@ Behavior
 ~~~~~~~~
 
 * AUTH_SCOPE (default: ['openid']) - list of scopes to request from the auth server
-* AUTH_GET_USER_FUNCTION (default: 'django_auth_oidc:get_user_by_username') - name of a function that takes the user info dict, and returns an user object representing that user
+* AUTH_GET_USER_FUNCTION (default: 'django_auth_oidc:get_user_by_username') - name of a function that takes the user info dict, and returns an user object representing that user; note that it should set the user.backend attribute.
 
 .. _openid-connect: https://gitlab.com/aiakos/python-openid-connect
 .. _Aiakos: https://gitlab.com/aiakos/aiakos
