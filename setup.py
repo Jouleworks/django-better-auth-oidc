@@ -7,7 +7,7 @@ with open('README.rst') as f:
 
 setup(
 	name = "django-auth-oidc",
-	version = "0.4.2",
+	version = "0.4.3",
 	description = "OpenID Connect authentication support for Django",
 	long_description = readme,
 	author = "Aiakos Contributors",
