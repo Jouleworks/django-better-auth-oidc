@@ -31,6 +31,11 @@ try:
 except AttributeError:
 	GET_USER_FUNCTION = 'django_auth_oidc:get_user_by_username'
 
+try:
+	ALLOWED_REDIRECTION_HOSTS = settings.ALLOWED_REDIRECTION_HOSTS
+except AttributeError:
+	ALLOWED_REDIRECTION_HOSTS = []
+
 
 def _import_object(path, def_name):
 	try:
@@ -67,11 +72,10 @@ def callback(request):
 	request.session['openid_token'] = res.id_token
 	request.session['openid'] = res.id
 
-	url_is_safe = is_safe_url(
-		url = return_path,
-		host = request.get_host(),
-		#allowed_hosts = set(request.get_host()),
-		#require_https = request.is_secure(),
+	url_is_safe = all(
+		is_safe_url(url=return_path, host=host)
+		for host
+		in settings.ALLOWED_REDIRECTION_HOSTS + [request.get_host()]
 	)
 	if not url_is_safe:
 		return redirect(resolve_url(LOGIN_REDIRECT_URL))
