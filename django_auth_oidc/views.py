@@ -34,7 +34,7 @@ except AttributeError:
 	GET_USER_FUNCTION = 'django_auth_oidc:get_user_by_username'
 
 try:
-	ALLOWED_REDIRECTION_HOSTS = os.getenv('ALLOWED_REDIRECTION_HOSTS', '').split() or settings.ALLOWED_REDIRECTION_HOSTS
+	ALLOWED_REDIRECTION_HOSTS = os.getenv('ALLOWED_REDIRECTION_HOSTS', '').split(',') or settings.ALLOWED_REDIRECTION_HOSTS
 except AttributeError:
 	ALLOWED_REDIRECTION_HOSTS = []
 
