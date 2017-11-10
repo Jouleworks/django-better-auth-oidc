@@ -75,7 +75,7 @@ def callback(request):
 	url_is_safe = any(
 		is_safe_url(url=return_path, host=host)
 		for host
-		in settings.ALLOWED_REDIRECTION_HOSTS + [request.get_host()]
+		in ALLOWED_REDIRECTION_HOSTS + [request.get_host()]
 	)
 	if not url_is_safe:
 		return redirect(resolve_url(LOGIN_REDIRECT_URL))
