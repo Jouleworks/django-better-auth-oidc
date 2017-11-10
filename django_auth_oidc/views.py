@@ -72,7 +72,7 @@ def callback(request):
 	request.session['openid_token'] = res.id_token
 	request.session['openid'] = res.id
 
-	url_is_safe = all(
+	url_is_safe = any(
 		is_safe_url(url=return_path, host=host)
 		for host
 		in settings.ALLOWED_REDIRECTION_HOSTS + [request.get_host()]
