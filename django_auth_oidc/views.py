@@ -51,8 +51,11 @@ def _import_object(path, def_name):
 get_user = _import_object(GET_USER_FUNCTION, 'get_user')
 
 
-def login(request):
-	return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
+def login(request, return_path = None):
+	if return_path is None:
+		return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
+
+	request.session['login_attempt'] = request.session.get('login_attempt', 0) + 1
 
 	return redirect(get_server().authorize(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:login-done")),
@@ -61,8 +64,23 @@ def login(request):
 	))
 
 
+class LoginFailed(Exception):
+	pass
+
+
+def login_again(request, return_path = None):
+	if request.session.get('login_attempt', 5) < 3:
+		return login(request, return_path)
+	else:
+		raise LoginFailed(f"Login failed after trying {request.session.get('login_attempt')} times.")
+
+
 def callback(request):
 	return_path = request.GET.get("state")
+	code = request.GET.get("code")
+
+	if not code:
+		return login_again(request, return_path)
 
 	res = get_server().request_token(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:login-done")),
@@ -70,6 +88,10 @@ def callback(request):
 	)
 
 	user = get_user(res.id)
+	if not user or not user.is_authenticated:
+		return login_again(request, return_path)
+
+	del request.session['login_attempt']
 	auth.login(request, user)
 	request.session['openid_token'] = res.id_token
 	request.session['openid'] = res.id
