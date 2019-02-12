@@ -11,7 +11,7 @@ except ImportError:
 	from django.core.urlresolvers import reverse # deprecated since Django 1.10
 from django.utils.http import is_safe_url
 
-from . import auth as _auth
+from .auth import get_server
 
 try:
 	LOGIN_REDIRECT_URL = settings.LOGIN_REDIRECT_URL
@@ -54,7 +54,7 @@ get_user = _import_object(GET_USER_FUNCTION, 'get_user')
 def login(request):
 	return_path = request.GET.get(auth.REDIRECT_FIELD_NAME, "")
 
-	return redirect(_auth.server.authorize(
+	return redirect(get_server().authorize(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:login-done")),
 		state = return_path,
 		scope = AUTH_SCOPE,
@@ -64,7 +64,7 @@ def login(request):
 def callback(request):
 	return_path = request.GET.get("state")
 
-	res = _auth.server.request_token(
+	res = get_server().request_token(
 		redirect_uri = request.build_absolute_uri(reverse("django_auth_oidc:login-done")),
 		code = request.GET["code"],
 	)
@@ -87,8 +87,9 @@ def logout(request):
 	id_token = request.session.get('openid_token', '')
 	auth.logout(request)
 
-	if _auth.server.end_session_endpoint:
-		return redirect(_auth.server.end_session(
+	server = get_server()
+	if server.end_session_endpoint:
+		return redirect(server.end_session(
 			post_logout_redirect_uri = request.build_absolute_uri(LOGOUT_REDIRECT_URL),
 			state = '',
 			id_token_hint = id_token,
