@@ -1,5 +1,5 @@
 Django-Better-Auth-OIDC - OpenID Connect authentication support for Django
-====
+==========================================================================
 
 This is a Django login view that authenticates against an OpenID Connect
 Authentication Server.
@@ -8,7 +8,7 @@ Use it if you own a single Authentication Server that you want to share
 between multiple apps.
 
 Huh?
---------
+----
 
 This is a fork of the abandoned django-auth-oidc_. Original code by the Aiakos_ team.
 
