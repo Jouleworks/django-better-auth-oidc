@@ -5,11 +5,8 @@ from importlib import import_module
 from django.conf import settings
 from django.contrib import auth
 from django.shortcuts import redirect, resolve_url
-try:
-	from django.urls import reverse
-except ImportError:
-	from django.core.urlresolvers import reverse # deprecated since Django 1.10
-from django.utils.http import is_safe_url
+from django.urls import reverse
+from django.utils.http import url_has_allowed_host_and_scheme
 
 from .auth import get_server
 
@@ -96,7 +93,7 @@ def callback(request):
 	request.session['openid_token'] = res.id_token
 	request.session['openid'] = res.id
 
-	url_is_safe = is_safe_url(
+	url_is_safe = url_has_allowed_host_and_scheme(
 		url = return_path,
 		allowed_hosts = {request.get_host(), *ALLOWED_REDIRECTION_HOSTS},
 	)

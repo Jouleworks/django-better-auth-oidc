@@ -1,7 +1,5 @@
-Django-Auth-OIDC - OpenID Connect authentication support for Django
-===================================================================
-.. image:: https://badge.fury.io/py/django-auth-oidc.svg
-	:target: https://badge.fury.io/py/django-auth-oidc
+Django-Better-Auth-OIDC - OpenID Connect authentication support for Django
+====
 
 This is a Django login view that authenticates against an OpenID Connect
 Authentication Server.
@@ -9,13 +7,18 @@ Authentication Server.
 Use it if you own a single Authentication Server that you want to share
 between multiple apps.
 
+Huh?
+--------
+
+This is a fork of the abandoned django-auth-oidc_. Original code by the Aiakos_ team.
+
+
 What is OpenID Connect?
 -----------------------
 
 It's a OAuth2-based standard for authentication in applications.
 
-It can be used for social logins (but we recommend Aiakos_ if you need
-more than one), and for setting up Single Sign-On into multiple services
+It can be used for social logins, and for setting up Single Sign-On into multiple services
 hosted by the same company. In the last case, it somewhat supersedes LDAP,
 as with OIDC people are entering their credentials only into the views
 served by the Authentication Server, and not into all the company's
@@ -24,8 +27,8 @@ applications.
 Requirements
 ------------
 
-- Python 2.7 / 3.5+
-- Django 1.8+
+- Python 3.5+
+- Django 4.x+
 - openid-connect_
 
 Installation
@@ -33,14 +36,14 @@ Installation
 
 .. code:: python
 
-	pip install django-auth-oidc
+	pip install django-better-auth-oidc
 
 settings.py
 ~~~~~~~~~~~
 
 .. code:: python
 
-	INSTALLED_APPS += ['django_auth_oidc']
+	INSTALLED_APPS += ['django_better_auth_oidc']
 
 urls.py
 ~~~~~~~
@@ -48,7 +51,7 @@ urls.py
 .. code:: python
 
 	urlpatterns += [
-		url(r'^auth/', include('django_auth_oidc.urls')),
+		path('auth/', include('django_better_auth_oidc.urls')),
 	]
 
 Configuration
@@ -86,3 +89,4 @@ Behavior
 
 .. _openid-connect: https://gitlab.com/aiakos/python-openid-connect
 .. _Aiakos: https://gitlab.com/aiakos/aiakos
+.. _django-auth-oidc: https://pypi.org/project/django-auth-oidc/

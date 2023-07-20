@@ -6,26 +6,27 @@ with open('README.rst') as f:
 	readme = f.read()
 
 setup(
-	name = "django-auth-oidc",
-	version = "0.6.0",
-	description = "OpenID Connect authentication support for Django",
+	name = "django-better-auth-oidc",
+	version = "0.1.0",
+	description = "Better OpenID Connect authentication support for Django",
 	long_description = readme,
-	author = "Aiakos Contributors",
-	author_email = "aiakos@aiakosauth.com",
-	url = "https://gitlab.com/aiakos/django-auth-oidc",
+	author = "Jouleworks Development Contributors",
+	author_email = "hello@jouleworksdev.com",
+	url = "https://gitlab.com/jouleworks/django-better-auth-oidc",
 	keywords = "django auth oauth openid oidc social ldap",
 
-	install_requires = ['django>=2.0.0', 'openid_connect'],
+	install_requires = ['django>=4.0.0', 'openid_connect'],
 
-	packages = ["django_auth_oidc"],
+	packages = ["django_better_auth_oidc"],
 	zip_safe = True,
 
 	license = "MIT",
 	classifiers = [
 		'Development Status :: 5 - Production/Stable',
 		'Framework :: Django',
-		'Framework :: Django :: 2.0',
-		'Framework :: Django :: 2.1',
+		'Framework :: Django :: 4.0',
+		'Framework :: Django :: 4.1',
+		'Framework :: Django :: 4.2',
 		'Intended Audience :: System Administrators',
 		'License :: OSI Approved :: MIT License',
 		'License :: OSI Approved :: BSD License',
