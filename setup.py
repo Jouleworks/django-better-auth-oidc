@@ -12,7 +12,7 @@ setup(
 	long_description = readme,
 	author = "Jouleworks Development Contributors",
 	author_email = "hello@jouleworksdev.com",
-	url = "https://gitlab.com/jouleworks/django-better-auth-oidc",
+	url = "https://github.com/jouleworks/django-better-auth-oidc",
 	keywords = "django auth oauth openid oidc social ldap",
 
 	install_requires = ['django>=4.0.0', 'openid_connect'],

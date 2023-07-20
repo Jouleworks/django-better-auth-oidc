@@ -57,6 +57,10 @@ urls.py
 Configuration
 -------------
 
+Server Cache Lock
+~~~~~~~~~~~~~~~~~
+By default, DBAO will only fetch the server info based on a cache lock timer. To disable this feature, use the setting AUTH_SERVER_CACHE_LOCK and set to false.
+
 Authorization Server
 ~~~~~~~~~~~~~~~~~~~~
 
